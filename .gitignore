@@ -9,8 +9,6 @@ __pycache__/
 # Runtime output, not source code
 data/*.db
 logs/*.log
-# ...but DO commit the served database (Option 1 bakes it into the deploy).
-!data/consensus.db
 
 # PyCharm's own local project settings
 .idea/

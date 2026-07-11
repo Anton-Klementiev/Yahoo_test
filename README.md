@@ -1,77 +1,100 @@
 # NASDAQ-100 Analyst Consensus vs the Index
 
-A small, local, free-to-run system that tracks the latest analyst consensus for every
-NASDAQ-100 company and compares each company's consensus against the index as a whole.
-It refreshes itself once a day, records when each company's consensus last changed, and
-serves the result as a web page.
+Tracks the latest analyst consensus for every NASDAQ-100 company and compares each company
+against the index as a whole. It exposes the result **both as a REST API and as a website**.
+A daily job pulls the data from Yahoo Finance and stores dated snapshots; the API and the page
+read those snapshots.
+
+- **Live site:** https://anton-klementiev.github.io/Yahoo_test/
+- **Live JSON API:** https://anton-klementiev.github.io/Yahoo_test/api/comparison.json
 
 ## What it measures
 
-For each stock, the **consensus** is expressed as the analysts' *implied 12-month upside*:
+For each stock, the **consensus** is the analysts' *implied 12-month upside*:
 
 ```
 implied_upside = (mean analyst price target - current price) / current price
 ```
 
-The **index** figure is the market-cap-weighted average of that same number across the
-constituents, and each company's headline number is its **delta** — how far its own
-implied upside sits above or below the index's.
+The **index** figure is the market-cap-weighted average of that number across the
+constituents, and each company's headline number is its **delta** — how far its own implied
+upside sits above or below the index's.
 
-## How it works
+## The API
 
-```mermaid
-flowchart LR
-  CSV[constituents.csv<br/>index membership] --> ING[Daily ingestion job]
-  YF[Yahoo Finance<br/>via yfinance] --> ING
-  SCHED[Windows Task Scheduler<br/>daily] --> ING
-  ING --> DB[(SQLite<br/>dated snapshots)]
-  DB --> AGG[Aggregation<br/>cap-weighted index + deltas]
-  AGG --> API[FastAPI]
-  API --> WEB[Browser<br/>table + chart]
+There are two ways to consume the API. Both return the same JSON shape.
+
+### 1. Published (read-only, always on, no server)
+
+Because the data is a read-only daily snapshot, it is published as static JSON on GitHub Pages.
+Any system can fetch it — no key, nothing running on anyone's machine:
+
+```
+# the whole comparison: index figure + every company's delta
+curl https://anton-klementiev.github.io/Yahoo_test/api/comparison.json
+
+# one company
+curl https://anton-klementiev.github.io/Yahoo_test/api/company/AAPL.json
 ```
 
-The daily job fetches price, price target, and market cap for each constituent, compares
-each analyst target to the last stored value, stamps `target_last_changed` when it moves,
-and writes a dated snapshot. The web layer reads the latest snapshots, computes the
-index number and every stock's delta on demand, and renders them.
+### 2. Live (running locally, computed on demand, API-key protected)
+
+The FastAPI app serves the same data as live endpoints. Health is public; the data endpoints
+require an `X-API-Key` header (set `API_KEY` in your `.env`).
+
+| Method & path              | Auth | Returns                                             |
+|----------------------------|------|-----------------------------------------------------|
+| `GET /api/health`          | no   | `{"status": "ok"}`                                  |
+| `GET /api/comparison`      | yes  | index figure + every company's delta (JSON)         |
+| `GET /api/company/{ticker}`| yes  | one company's figures (JSON); 404 if unknown        |
+
+```
+curl -H "X-API-Key: YOUR_KEY" http://127.0.0.1:8000/api/comparison
+curl -H "X-API-Key: YOUR_KEY" http://127.0.0.1:8000/api/company/AAPL
+```
+
+### Response shape
+
+`GET /api/comparison` (and `comparison.json`):
+
+```json
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.1819,
+  "companies": [
+    {
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "price": 210.5,
+      "mean_target": 215.0,
+      "num_analysts": 34,
+      "implied_upside": 0.0214,
+      "delta_vs_index": -0.1605,
+      "target_last_changed": "2026-07-02",
+      "included_in_index": true
+    }
+  ]
+}
+```
+
+Fractions are decimals: `0.1819` = +18.19%. `included_in_index` is false for excluded
+secondary listings (e.g. `GOOG`). A company with no usable target has `implied_upside` and
+`delta_vs_index` of `null`.
+
+## The website
+
+The same numbers as a page with a chart and a sortable table. It is a client of the API —
+nothing more.
+
+- **Published:** https://anton-klementiev.github.io/Yahoo_test/ (static, always on)
+- **Local:** `uvicorn src.api:app --reload`, then open <http://127.0.0.1:8000/>
 
 ## Tech stack
 
-- **Python 3.11+** — the whole application.
-- **yfinance** — free analyst data from Yahoo Finance (primary source, behind a swappable
-  interface).
-- **SQLite** (built-in `sqlite3`) — single-file storage of dated snapshots.
-- **FastAPI + uvicorn** — the local web server and data endpoints.
-- **Chart.js** — the bar chart on the page.
-- **pytest** — tests for the aggregation math.
-- **PowerShell + Windows Task Scheduler** — the unattended daily run.
+Python 3.11 · yfinance (Yahoo data) · SQLite (`sqlite3`) · FastAPI + uvicorn · Chart.js ·
+pytest. No frameworks beyond these; the published site and API are plain static files.
 
-## Project structure
-
-```
-Project1/
-  config/settings.toml        # locked project decisions
-  data/
-    constituents.csv          # NASDAQ-100 membership (version-controlled reference data)
-    consensus.db              # generated snapshot database (git-ignored)
-  logs/                       # run logs (git-ignored)
-  scripts/run_ingest.ps1      # PowerShell wrapper for the scheduled job
-  src/
-    models.py                 # the Quote data structure + the upside formula
-    constituents.py           # loads the membership list
-    data_sources/
-      base.py                 # the DataSource interface
-      yahoo.py                # the Yahoo implementation (retries, graceful failure)
-    database.py               # schema + save/load
-    ingest.py                 # the daily change-detection job
-    aggregation.py            # cap-weighted index + per-stock deltas
-    api.py                    # FastAPI app
-  tests/test_aggregation.py   # aggregation math tests
-  web/index.html              # the web page
-  requirements.txt
-```
-
-## Setup and use
+## Setup
 
 ```
 python -m venv .venv
@@ -79,57 +102,64 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-Populate data (takes a few minutes; polite pause between stocks):
+Populate the database (a polite pause between stocks; ~1–2 minutes for the full list):
 
 ```
 python -m src.ingest
 ```
 
-Serve the site:
+## Running locally
 
 ```
 uvicorn src.api:app --reload
 ```
 
-Then open <http://127.0.0.1:8000/>. Run the tests with `python -m pytest -q`.
+Open <http://127.0.0.1:8000/> for the page, <http://127.0.0.1:8000/api/health> to check the
+API. The live `/api/comparison` result is cached in memory and rebuilt only when a newer
+snapshot date appears, so repeated requests do not recompute it. Run the tests with
+`python -m pytest -q`.
 
-The daily refresh is handled by Windows Task Scheduler via `scripts/run_ingest.ps1`
-(see the Phase 7 notes). It uses `-StartWhenAvailable`, so a missed run (machine asleep)
-executes when the computer is next available.
+## Publishing the site + API (GitHub Pages, free, always on)
 
-## Documented assumptions and limitations
+1. Refresh the data and regenerate the static files:
+   ```
+   python -m src.ingest
+   python scripts/generate_site.py
+   ```
+   This writes `docs/index.html`, `docs/api/comparison.json`, and one
+   `docs/api/company/<TICKER>.json` per company.
 
-These are deliberate choices, noted so the results are interpreted correctly:
+2. Commit and push:
+   ```
+   git add docs
+   git commit -m "refresh published site"
+   git push origin master
+   ```
 
-- **12-month horizon.** Analyst price targets are 12-month figures, so the implied upside
-  is a yearly expectation, not quarterly. The same horizon applies to both the stock and
-  the index number, so the comparison is consistent.
-- **Market-cap weighting is an approximation.** The real NASDAQ-100 uses a *modified*
-  capitalization weighting with caps on the largest members. This project uses plain
-  market-cap weights — close, and free to compute, but not identical to the official index.
-- **Dual-class dedup.** Alphabet lists as both `GOOG` and `GOOGL`, and the data source
-  reports the *full company* market cap under each. To avoid counting Alphabet twice, the
-  secondary listing (`GOOG`) is excluded from the index aggregate.
-- **Mega-cap self-weighting.** A few members (Apple, Microsoft, Nvidia) are very large
-  parts of the index they are compared against, which dampens their delta versus the index.
-  This is inherent to comparing a constituent to its own benchmark.
-- **"Changed" means the prediction, not the price.** Prices move every day on their own;
-  the analyst target moves only when an analyst revises. `target_last_changed` tracks the
-  target, which is what "the consensus changed" means.
-- **Missing coverage is excluded.** A stock with no usable price target contributes nothing
-  to the index average rather than being counted as zero.
-- **Free, unofficial data source.** Yahoo Finance (via yfinance) is not a licensed feed and
-  can change format or throttle without notice. The `DataSource` interface exists so a
-  fallback provider can be added without touching the rest of the system; fetches already
-  retry and degrade gracefully (last-known values persist on failure).
-- **Local, personal use.** The data is fetched for a local, non-redistributed, personal
-  project. Republishing the data or running this as a public service would raise
-  terms-of-service considerations that this scope avoids.
+3. Enable Pages **once**: repo **Settings → Pages → Build and deployment → Source: Deploy from
+   a branch → Branch: `master`, folder: `/docs` → Save**. After ~1 minute the site is live at
+   https://anton-klementiev.github.io/Yahoo_test/ and the JSON API under `/api/` beside it.
+
+To update later, repeat steps 1–2; Pages redeploys automatically. Your machine only needs to be
+on for that refresh — the published site and API stay up on their own.
+
+## Assumptions and limitations
+
+- **12-month horizon.** Analyst targets are 12-month figures, so the implied upside is a yearly
+  expectation, applied consistently to both the stock and the index.
+- **Plain market-cap weighting** — an approximation of the official *modified* cap weighting
+  (which caps the largest members). Close, free to compute, not identical.
+- **Dual-class dedup.** Alphabet lists as both `GOOG` and `GOOGL` and reports the full company
+  market cap under each, so `GOOG` is excluded from the index aggregate.
+- **"Changed" means the prediction, not the price.** `target_last_changed` moves only when an
+  analyst revises the target.
+- **Missing coverage is excluded** from the index rather than counted as zero.
+- **Published API is a daily snapshot**, not a live query engine: it is a static file refreshed
+  when you regenerate and push. That fits data that changes once a day and needs no server.
+- **Free, unofficial data source.** Yahoo Finance (via yfinance) can change format or throttle;
+  the `DataSource` interface exists so a fallback can be added without touching the rest.
 
 ## Maintenance
 
-The constituents list changes only a few times a year (at the index's annual
-reconstitution). When it does, update `data/constituents.csv` by hand — a deliberate
-choice over a fragile live scrape, since reliability matters more than automation for
-data that changes so rarely.
-```
+The constituents list changes only a few times a year (index reconstitution). Update
+`data/constituents.csv` by hand when it does.

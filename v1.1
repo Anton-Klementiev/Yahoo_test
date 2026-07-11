@@ -1,0 +1,321 @@
+Index: .dockerignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.dockerignore b/.dockerignore
+new file mode 100644
+--- /dev/null	(revision 721b97b057bb88702f2987ae810750bb9be9dd5a)
++++ b/.dockerignore	(revision 721b97b057bb88702f2987ae810750bb9be9dd5a)
+@@ -0,0 +1,13 @@
++# Keep the image small and the build reproducible. NOTE: data/ is deliberately NOT
++# excluded, because Option 1 bakes data/consensus.db into the image.
++.git
++.venv
++venv
++__pycache__
++*.pyc
++.pytest_cache
++.idea
++logs
++.env
++tests
++Untitled Diagram.drawio
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.gitignore b/.gitignore
+--- a/.gitignore	(revision ae025e4fd039c5c2d91bdecadb68bd1cce6aab4d)
++++ b/.gitignore	(revision 721b97b057bb88702f2987ae810750bb9be9dd5a)
+@@ -9,6 +9,8 @@
+ # Runtime output, not source code
+ data/*.db
+ logs/*.log
++# ...but DO commit the served database (Option 1 bakes it into the deploy).
++!data/consensus.db
+ 
+ # PyCharm's own local project settings
+ .idea/
+Index: Dockerfile
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Dockerfile b/Dockerfile
+new file mode 100644
+--- /dev/null	(revision 721b97b057bb88702f2987ae810750bb9be9dd5a)
++++ b/Dockerfile	(revision 721b97b057bb88702f2987ae810750bb9be9dd5a)
+@@ -0,0 +1,22 @@
++# Container image for the API. Under Option 1 the SQLite database file is committed to
++# the repo (data/consensus.db) and copied into the image, so the deployed service serves
++# that baked-in snapshot read-only. To refresh the data you run ingestion locally, commit
++# the updated database, and redeploy.
++FROM python:3.11-slim
++
++ENV PYTHONDONTWRITEBYTECODE=1 \
++    PYTHONUNBUFFERED=1
++
++WORKDIR /app
++
++# Install dependencies first so this layer is cached unless requirements.txt changes.
++COPY requirements.txt ./
++RUN pip install --no-cache-dir -r requirements.txt
++
++# Copy the application (including data/consensus.db, per .dockerignore).
++COPY . .
++
++EXPOSE 8000
++
++# Render (and most hosts) provide $PORT; default to 8000 locally.
++CMD ["sh", "-c", "uvicorn src.api:app --host 0.0.0.0 --port ${PORT:-8000}"]
+Index: render.yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/render.yaml b/render.yaml
+new file mode 100644
+--- /dev/null	(revision 721b97b057bb88702f2987ae810750bb9be9dd5a)
++++ b/render.yaml	(revision 721b97b057bb88702f2987ae810750bb9be9dd5a)
+@@ -0,0 +1,17 @@
++# Render Blueprint: one free Docker web service. Under Option 1 there is no separate
++# database service — the SQLite file ships inside the image (committed to the repo).
++#
++# In the Render dashboard, create a Blueprint from this file. Render builds the Docker
++# image from your repo and deploys it. The free instance sleeps after ~15 min idle and
++# takes ~1 minute to wake on the next request.
++
++services:
++  - type: web
++    name: nasdaq-consensus-api
++    runtime: docker
++    plan: free
++    healthCheckPath: /api/health   # public endpoint, so health checks pass without a key
++    envVars:
++      - key: API_KEY
++        generateValue: true        # Render generates a value; see the deploy notes about
++                                    # the key being visible in the served page
+Index: src/api.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/api.py b/src/api.py
+--- a/src/api.py	(revision ae025e4fd039c5c2d91bdecadb68bd1cce6aab4d)
++++ b/src/api.py	(revision 721b97b057bb88702f2987ae810750bb9be9dd5a)
+@@ -16,11 +16,35 @@
+ WEB_DIR = Path(__file__).resolve().parents[1] / "web"
+ 
+ 
++# In-memory cache of the built comparison. The underlying data changes only once a day
++# (after ingestion writes a new dated snapshot), so we rebuild the comparison only when a
++# newer snapshot date appears — instead of recomputing it from the database on every
++# request. Keyed by the latest observed_on date; a cheap MAX() query decides freshness.
++_cache: dict = {"as_of": None, "data": None}
++
++
++def _latest_observed_on(connection) -> str | None:
++    """The most recent snapshot date, or None if there are no snapshots yet."""
++    row = connection.execute("SELECT MAX(observed_on) AS latest FROM snapshots").fetchone()
++    return row["latest"] if row else None
++
++
+ def _load_comparison() -> dict:
+-    """Open the database, build the comparison, and always close the connection."""
++    """Return the comparison, rebuilding it only when new data has arrived.
++
++    Opens the database, checks the latest snapshot date cheaply, and reuses the cached
++    result if nothing has changed. The expensive build_comparison runs only when the
++    latest date differs from what is cached. The connection is always closed.
++    """
+     connection = get_connection()
+     try:
+-        return build_comparison(connection)
++        latest = _latest_observed_on(connection)
++        if _cache["data"] is not None and _cache["as_of"] == latest:
++            return _cache["data"]
++        data = build_comparison(connection)
++        _cache["as_of"] = latest
++        _cache["data"] = data
++        return data
+     finally:
+         connection.close()
+ 
+Index: src/constituents.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/constituents.py b/src/constituents.py
+--- a/src/constituents.py	(revision ae025e4fd039c5c2d91bdecadb68bd1cce6aab4d)
++++ b/src/constituents.py	(revision 721b97b057bb88702f2987ae810750bb9be9dd5a)
+@@ -13,7 +13,11 @@
+ 
+ logger = logging.getLogger(__name__)
+ 
+-CONSTITUENTS_PATH = Path("data") / "constituents.csv"
++# Resolve relative to the project root (the folder above src/), NOT the current working
++# directory — otherwise the load breaks whenever the app is launched from anywhere else.
++# This matches how src/database.py already resolves its DB path.
++PROJECT_ROOT = Path(__file__).resolve().parents[1]
++CONSTITUENTS_PATH = PROJECT_ROOT / "data" / "constituents.csv"
+ 
+ 
+ def get_constituents() -> list[str]:
+diff --git a/data/consensus.db b/data/consensus.db
+new file mode 100644
+index 0000000000000000000000000000000000000000..7bf0da4bcaa118a72e2a1f69fbca2d1238982533
+GIT binary patch
+literal 28672
+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
+b`+8F&^yaS=_82*LyV&Z$Nhr75e6##tevK9k
+

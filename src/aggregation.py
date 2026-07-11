@@ -59,6 +59,7 @@ def build_comparison(connection):
             delta = None
         companies.append({
             "ticker": row["ticker"],
+            "name": row["name"],
             "price": row["price"],
             "mean_target": row["mean_target"],
             "num_analysts": row["num_analysts"],

@@ -1,7 +1,9 @@
 import logging
 
-from fastapi import FastAPI, HTTPException
 
+from fastapi import FastAPI, HTTPException
+from pathlib import Path
+from fastapi.responses import FileResponse
 from src.database import get_connection
 from src.aggregation import build_comparison
 
@@ -18,6 +20,13 @@ def _load_comparison() -> dict:
     finally:
         connection.close()
 
+WEB_DIR = Path(__file__).resolve().parents[1] / "web"
+
+
+@app.get("/")
+def index():
+    """Serve the web page."""
+    return FileResponse(WEB_DIR / "index.html")
 
 @app.get("/api/health")
 def health() -> dict:

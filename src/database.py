@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS snapshots (
     num_analysts        INTEGER,
     implied_upside      REAL,
     source              TEXT,
+    name                TEXT,
     target_last_changed TEXT,            -- date the analyst target last moved
     PRIMARY KEY (ticker, observed_on)
 );
@@ -34,9 +35,16 @@ def get_connection() -> sqlite3.Connection:
 
 
 def init_db() -> None:
-    """Create the table if it does not already exist. Safe to run repeatedly."""
-    with get_connection() as connection:
+    """Create the table if needed, and add any columns missing from an older database."""
+    connection = get_connection()
+    try:
         connection.executescript(SCHEMA)
+        existing = {row["name"] for row in connection.execute("PRAGMA table_info(snapshots)")}
+        if "name" not in existing:
+            connection.execute("ALTER TABLE snapshots ADD COLUMN name TEXT")
+        connection.commit()
+    finally:
+        connection.close()
     logger.info("Database ready at %s", DB_PATH)
 
 
@@ -51,13 +59,13 @@ def save_snapshot(
         """
         INSERT OR REPLACE INTO snapshots
             (ticker, observed_on, price, mean_target, market_cap,
-             num_analysts, implied_upside, source, target_last_changed)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+             num_analysts, implied_upside, source, name, target_last_changed)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """,
         (
             quote.ticker, observed_on, quote.price, quote.mean_target,
             quote.market_cap, quote.num_analysts, quote.implied_upside,
-            quote.source, target_last_changed,
+            quote.source, quote.name, target_last_changed,
         ),
     )
 

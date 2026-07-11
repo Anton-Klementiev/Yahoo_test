@@ -5,6 +5,7 @@ tenacity     # automatically retries a failed web request instead of letting it 
 
 # --- Data handling ---
 pandas       # works with data in table form and parses the index-membership list
+lxml
 
 # --- Web server and data endpoints ---
 fastapi      # the framework that serves your website and its data

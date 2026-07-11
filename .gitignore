@@ -1,0 +1,14 @@
+# The private environment — recreated anytime from requirements.txt
+.venv/
+venv/
+
+# Python's compiled cache files
+__pycache__/
+*.pyc
+
+# Runtime output, not source code
+data/*.db
+logs/*.log
+
+# PyCharm's own local project settings
+.idea/

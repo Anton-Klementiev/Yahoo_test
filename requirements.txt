@@ -1,0 +1,15 @@
+# --- Data acquisition ---
+yfinance     # pulls price, analyst price targets, and market cap from Yahoo Finance
+requests     # makes direct web requests to the backup data source
+tenacity     # automatically retries a failed web request instead of letting it crash the run
+
+# --- Data handling ---
+pandas       # works with data in table form and parses the index-membership list
+
+# --- Web server and data endpoints ---
+fastapi      # the framework that serves your website and its data
+uvicorn      # the program that actually runs the FastAPI application
+jinja2       # fills your HTML page template with live values
+
+# --- Testing ---
+pytest       # runs the automated checks on your calculations

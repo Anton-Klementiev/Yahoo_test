@@ -1,0 +1,16 @@
+[universe]
+index = "NASDAQ-100"
+
+[metric]
+type = "implied_upside"
+horizon = "12-month"
+
+[aggregation]
+weighting = "market_cap"
+
+[data_source]
+primary  = "yahoo"
+fallback = "stockanalysis"
+
+[schedule]
+frequency = "daily"

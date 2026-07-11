@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "WDAY",
+    "name": "Workday, Inc.",
+    "price": 138.95,
+    "mean_target": 170.58974,
+    "num_analysts": 39,
+    "implied_upside": 0.22770593738754963,
+    "delta_vs_index": 0.0458021302803171,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

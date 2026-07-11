@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "MSFT",
+    "name": "Microsoft Corporation",
+    "price": 385.1,
+    "mean_target": 559.9331,
+    "num_analysts": 55,
+    "implied_upside": 0.4539940275253179,
+    "delta_vs_index": 0.2720902204180854,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

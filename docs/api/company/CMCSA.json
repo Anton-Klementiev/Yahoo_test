@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "CMCSA",
+    "name": "Comcast Corporation",
+    "price": 23.57,
+    "mean_target": 32.09524,
+    "num_analysts": 21,
+    "implied_upside": 0.3616987696224012,
+    "delta_vs_index": 0.1797949625151687,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

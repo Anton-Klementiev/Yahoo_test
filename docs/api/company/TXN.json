@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "TXN",
+    "name": "Texas Instruments Incorporated",
+    "price": 311.46,
+    "mean_target": 298.0,
+    "num_analysts": 32,
+    "implied_upside": -0.043215822256469465,
+    "delta_vs_index": -0.225119629363702,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

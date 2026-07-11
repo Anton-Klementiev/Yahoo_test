@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "AXON",
+    "name": "Axon Enterprise, Inc.",
+    "price": 565.8,
+    "mean_target": 670.3711,
+    "num_analysts": 18,
+    "implied_upside": 0.1848199010250972,
+    "delta_vs_index": 0.0029160939178646816,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

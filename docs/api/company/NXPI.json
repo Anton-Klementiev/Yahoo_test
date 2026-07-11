@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "NXPI",
+    "name": "NXP Semiconductors N.V.",
+    "price": 292.26,
+    "mean_target": 308.06897,
+    "num_analysts": 29,
+    "implied_upside": 0.0540921439813864,
+    "delta_vs_index": -0.12781166312584613,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

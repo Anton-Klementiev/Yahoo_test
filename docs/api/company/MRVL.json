@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "MRVL",
+    "name": "Marvell Technology, Inc.",
+    "price": 235.81,
+    "mean_target": 252.25777,
+    "num_analysts": 41,
+    "implied_upside": 0.06975009541580082,
+    "delta_vs_index": -0.1121537116914317,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "TRI",
+    "name": "Thomson Reuters Corp",
+    "price": 89.65,
+    "mean_target": 119.33333,
+    "num_analysts": 12,
+    "implied_upside": 0.3311023982152816,
+    "delta_vs_index": 0.14919859110804906,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

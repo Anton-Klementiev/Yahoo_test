@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "INTC",
+    "name": "Intel Corporation",
+    "price": 109.84,
+    "mean_target": 100.87619,
+    "num_analysts": 42,
+    "implied_upside": -0.08160788419519309,
+    "delta_vs_index": -0.26351169130242563,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "PANW",
+    "name": "Palo Alto Networks, Inc.",
+    "price": 325.91,
+    "mean_target": 324.14368,
+    "num_analysts": 49,
+    "implied_upside": -0.005419655733177893,
+    "delta_vs_index": -0.18732346284041043,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

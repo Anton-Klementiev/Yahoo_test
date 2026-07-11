@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "FAST",
+    "name": "Fastenal Company",
+    "price": 46.49,
+    "mean_target": 47.075,
+    "num_analysts": 12,
+    "implied_upside": 0.012583351258335143,
+    "delta_vs_index": -0.16932045584889738,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

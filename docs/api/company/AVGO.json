@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "AVGO",
+    "name": "Broadcom Inc.",
+    "price": 399.97,
+    "mean_target": 523.72894,
+    "num_analysts": 45,
+    "implied_upside": 0.30942055654174044,
+    "delta_vs_index": 0.12751674943450791,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

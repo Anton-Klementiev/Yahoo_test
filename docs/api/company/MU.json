@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "MU",
+    "name": "Micron Technology, Inc.",
+    "price": 979.3,
+    "mean_target": 1486.0,
+    "num_analysts": 42,
+    "implied_upside": 0.5174103951802308,
+    "delta_vs_index": 0.33550658807299827,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "VRTX",
+    "name": "Vertex Pharmaceuticals Incorpor",
+    "price": 485.39,
+    "mean_target": 554.56,
+    "num_analysts": 25,
+    "implied_upside": 0.14250396588310424,
+    "delta_vs_index": -0.03939984122412829,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

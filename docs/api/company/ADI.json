@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "ADI",
+    "name": "Analog Devices, Inc.",
+    "price": 395.65,
+    "mean_target": 453.66666,
+    "num_analysts": 30,
+    "implied_upside": 0.14663631997978013,
+    "delta_vs_index": -0.035267487127452396,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

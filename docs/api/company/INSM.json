@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "INSM",
+    "name": "Insmed Incorporated",
+    "price": 115.61,
+    "mean_target": 197.04762,
+    "num_analysts": 21,
+    "implied_upside": 0.7044167459562322,
+    "delta_vs_index": 0.5225129388489996,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

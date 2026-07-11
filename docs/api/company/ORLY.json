@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "ORLY",
+    "name": "O'Reilly Automotive, Inc.",
+    "price": 86.28,
+    "mean_target": 110.25,
+    "num_analysts": 24,
+    "implied_upside": 0.2778164116828929,
+    "delta_vs_index": 0.09591260457566037,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

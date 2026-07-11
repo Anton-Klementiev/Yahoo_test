@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "TTWO",
+    "name": "Take-Two Interactive Software, ",
+    "price": 243.2,
+    "mean_target": 284.13965,
+    "num_analysts": 29,
+    "implied_upside": 0.16833737664473697,
+    "delta_vs_index": -0.01356643046249556,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

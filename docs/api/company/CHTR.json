@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "CHTR",
+    "name": "Charter Communications, Inc.",
+    "price": 130.73,
+    "mean_target": 225.5294,
+    "num_analysts": 17,
+    "implied_upside": 0.725154134475637,
+    "delta_vs_index": 0.5432503273684045,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

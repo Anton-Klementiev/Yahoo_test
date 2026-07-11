@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "PAYX",
+    "name": "Paychex, Inc.",
+    "price": 107.54,
+    "mean_target": 106.57143,
+    "num_analysts": 14,
+    "implied_upside": -0.009006602194532264,
+    "delta_vs_index": -0.19091040930176478,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

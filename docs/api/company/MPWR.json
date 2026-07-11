@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "MPWR",
+    "name": "Monolithic Power Systems, Inc.",
+    "price": 1352.74,
+    "mean_target": 1789.2307,
+    "num_analysts": 13,
+    "implied_upside": 0.3226715407247513,
+    "delta_vs_index": 0.14076773361751876,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

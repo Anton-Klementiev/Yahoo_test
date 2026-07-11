@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "PYPL",
+    "name": "PayPal Holdings, Inc.",
+    "price": 46.32,
+    "mean_target": 51.37912,
+    "num_analysts": 34,
+    "implied_upside": 0.10922107081174438,
+    "delta_vs_index": -0.07268273629548815,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

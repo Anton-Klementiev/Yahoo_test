@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "APP",
+    "name": "Applovin Corporation",
+    "price": 506.98,
+    "mean_target": 654.6,
+    "num_analysts": 30,
+    "implied_upside": 0.2911751942877431,
+    "delta_vs_index": 0.10927138718051055,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

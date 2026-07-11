@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "CSX",
+    "name": "CSX Corporation",
+    "price": 49.41,
+    "mean_target": 48.36957,
+    "num_analysts": 23,
+    "implied_upside": -0.021057073466909403,
+    "delta_vs_index": -0.20296088057414194,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "FER",
+    "name": "Ferrovial N.V.",
+    "price": 64.28,
+    "mean_target": 76.67695,
+    "num_analysts": 3,
+    "implied_upside": 0.19285858742999384,
+    "delta_vs_index": 0.010954780322761315,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

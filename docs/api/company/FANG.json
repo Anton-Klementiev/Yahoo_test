@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "FANG",
+    "name": "Diamondback Energy, Inc.",
+    "price": 183.39,
+    "mean_target": 231.82143,
+    "num_analysts": 28,
+    "implied_upside": 0.2640898086046132,
+    "delta_vs_index": 0.08218600149738065,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

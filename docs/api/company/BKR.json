@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "BKR",
+    "name": "Baker Hughes Company",
+    "price": 57.56,
+    "mean_target": 70.86364,
+    "num_analysts": 22,
+    "implied_upside": 0.23112647671994443,
+    "delta_vs_index": 0.049222669612711906,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

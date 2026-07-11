@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "MDLZ",
+    "name": "Mondelez International, Inc.",
+    "price": 58.83,
+    "mean_target": 67.27273,
+    "num_analysts": 22,
+    "implied_upside": 0.1435106238313785,
+    "delta_vs_index": -0.03839318327585403,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

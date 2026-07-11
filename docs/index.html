@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NASDAQ-100 Consensus vs Index</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --surface:        #fcfcfb;
+    --plane:          #f9f9f7;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #898781;
+    --gridline:       #e1e0d9;
+    --border:         rgba(11,11,11,0.10);
+    --above:          #2a78d6;  /* above the index */
+    --below:          #eb6834;  /* below the index */
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface:        #1a1a19;
+      --plane:          #0d0d0d;
+      --text-primary:   #ffffff;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #898781;
+      --gridline:       #2c2c2a;
+      --border:         rgba(255,255,255,0.10);
+      --above:          #3987e5;
+      --below:          #d95926;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--plane);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.4;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .sub { color: var(--text-secondary); font-size: 0.9rem; margin: 0 0 28px; }
+  .hero {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  }
+  .hero .label { color: var(--text-secondary); font-size: 0.95rem; }
+  .hero .value { font-size: 2.4rem; font-weight: 700; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 28px;
+  }
+  .card h2 { font-size: 1rem; margin: 0 0 4px; }
+  .legend { color: var(--text-secondary); font-size: 0.82rem; margin: 0 0 12px; }
+  .swatch { display:inline-block; width:10px; height:10px; border-radius:2px; vertical-align:middle; margin: 0 3px 0 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+  thead th {
+    position: sticky; top: 0;
+    background: var(--surface);
+    text-align: right;
+    padding: 9px 10px;
+    border-bottom: 2px solid var(--gridline);
+    color: var(--text-secondary);
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+  }
+  thead th:first-child, thead th:nth-child(2), thead th:nth-child(3) { text-align: left; }
+  thead th:hover { color: var(--text-primary); }
+  tbody td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--gridline);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  tbody td:first-child, tbody td:nth-child(2), tbody td:nth-child(3) { text-align: left; }
+  tbody td:nth-child(2) { font-weight: 600; }
+  tbody tr:hover { background: var(--plane); }
+  .name { color: var(--text-secondary); max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pos { color: var(--above); font-weight: 600; }
+  .neg { color: var(--below); font-weight: 600; }
+  .muted { color: var(--text-muted); }
+  .err { color: var(--below); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>NASDAQ-100 — Analyst Consensus vs the Index</h1>
+  <p class="sub" id="asof">Loading…</p>
+
+  <div class="hero">
+    <span class="label">Index consensus (market-cap-weighted implied 12-month upside):</span>
+    <span class="value" id="indexUpside">—</span>
+  </div>
+
+  <div class="card">
+    <h2>Biggest gaps versus the index</h2>
+    <p class="legend">
+      Delta = a stock's implied upside minus the index's, in percentage points.
+      <span class="swatch" style="background:var(--above)"></span>above the index
+      <span class="swatch" style="background:var(--below)"></span>below the index
+    </p>
+    <canvas id="chart" height="320"></canvas>
+  </div>
+
+  <div class="card">
+    <h2>All companies</h2>
+    <p class="legend">Click any column heading to sort. Colour marks above / below the index.</p>
+    <div style="overflow-x:auto;">
+      <table id="tbl">
+        <thead>
+          <tr>
+            <th data-key="rank" data-type="num">#</th>
+            <th data-key="ticker" data-type="str">Ticker</th>
+            <th data-key="name" data-type="str">Company</th>
+            <th data-key="price" data-type="num">Price</th>
+            <th data-key="mean_target" data-type="num">Target</th>
+            <th data-key="implied_upside" data-type="num">Upside</th>
+            <th data-key="delta_vs_index" data-type="num">&Delta; vs index (pp)</th>
+            <th data-key="num_analysts" data-type="num">Analysts</th>
+            <th data-key="target_last_changed" data-type="str">Consensus changed</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+const pct  = v => (v === null || v === undefined) ? "—" : (v * 100).toFixed(1) + "%";
+const pp   = v => (v === null || v === undefined) ? "—" : (v * 100 >= 0 ? "+" : "") + (v * 100).toFixed(1);
+const usd  = v => (v === null || v === undefined) ? "—" : "$" + v.toFixed(2);
+const num  = v => (v === null || v === undefined) ? "—" : v;
+const cls  = v => v === null || v === undefined ? "muted" : (v >= 0 ? "pos" : "neg");
+
+let companies = [];
+let sortKey = "delta_vs_index", sortDir = -1, sortType = "num";
+
+async function load() {
+  let data;
+  try {
+    const API_KEY = "__API_KEY__";  // replaced by the server at load time
+    const res = await fetch("./api/comparison.json");
+    data = await res.json();
+  } catch (e) {
+    document.getElementById("asof").innerHTML =
+      '<span class="err">Could not reach the data API. Is the server running?</span>';
+    return;
+  }
+
+  document.getElementById("asof").textContent =
+    "Latest consensus as of " + (data.as_of || "unknown") + ".";
+
+  const idx = data.index_upside;
+  const el = document.getElementById("indexUpside");
+  el.textContent = pct(idx);
+  el.className = "value " + (idx >= 0 ? "pos" : "neg");
+
+  // give each company a stable rank by delta (already sorted desc from the API)
+  companies = data.companies.map((c, i) => ({ ...c, rank: i + 1 }));
+
+  drawChart();
+  renderTable();
+}
+
+function drawChart() {
+  const withDelta = companies.filter(c => c.delta_vs_index !== null);
+  const top = withDelta.slice(0, 10);
+  const bottom = withDelta.slice(-10);
+  const picked = top.concat(bottom.filter(b => !top.includes(b)));
+  picked.sort((a, b) => b.delta_vs_index - a.delta_vs_index);
+
+  const styles = getComputedStyle(document.documentElement);
+  const above = styles.getPropertyValue("--above").trim();
+  const below = styles.getPropertyValue("--below").trim();
+  const grid  = styles.getPropertyValue("--gridline").trim();
+  const ink   = styles.getPropertyValue("--text-secondary").trim();
+
+  new Chart(document.getElementById("chart"), {
+    type: "bar",
+    data: {
+      labels: picked.map(c => c.ticker),
+      datasets: [{
+        data: picked.map(c => +(c.delta_vs_index * 100).toFixed(1)),
+        backgroundColor: picked.map(c => c.delta_vs_index >= 0 ? above : below),
+        borderRadius: 4,
+      }],
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              const c = picked[ctx.dataIndex];
+              const v = c.delta_vs_index * 100;
+              return `${c.name || c.ticker}: ${v >= 0 ? "+" : ""}${v.toFixed(1)} pp vs index`;
+            },
+          },
+        },
+      },
+      scales: {
+        x: { grid: { color: grid }, ticks: { color: ink, callback: v => v + " pp" } },
+        y: { grid: { display: false }, ticks: { color: ink } },
+      },
+    },
+  });
+}
+
+function renderTable() {
+  const body = document.getElementById("tbody");
+  const rows = [...companies].sort((a, b) => {
+    let x = a[sortKey], y = b[sortKey];
+    if (x === null || x === undefined) return 1;
+    if (y === null || y === undefined) return -1;
+    if (sortType === "str") return sortDir * String(x).localeCompare(String(y));
+    return sortDir * (x - y);
+  });
+
+  body.innerHTML = rows.map(c => `
+    <tr>
+      <td class="muted">${c.rank}</td>
+      <td>${c.ticker}</td>
+      <td class="name" title="${c.name || ""}">${c.name || ""}</td>
+      <td>${usd(c.price)}</td>
+      <td>${usd(c.mean_target)}</td>
+      <td class="${cls(c.implied_upside)}">${pct(c.implied_upside)}</td>
+      <td class="${cls(c.delta_vs_index)}">${pp(c.delta_vs_index)}</td>
+      <td>${num(c.num_analysts)}</td>
+      <td class="muted">${c.target_last_changed || "—"}</td>
+    </tr>`).join("");
+}
+
+document.querySelectorAll("#tbl thead th").forEach(th => {
+  th.addEventListener("click", () => {
+    const key = th.dataset.key;
+    if (key === sortKey) { sortDir *= -1; }
+    else { sortKey = key; sortType = th.dataset.type; sortDir = th.dataset.type === "str" ? 1 : -1; }
+    renderTable();
+  });
+});
+
+load();
+</script>
+</body>
+</html>

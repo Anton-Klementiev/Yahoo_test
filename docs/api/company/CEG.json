@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "CEG",
+    "name": "Constellation Energy Corporatio",
+    "price": 251.38,
+    "mean_target": 357.81332,
+    "num_analysts": 21,
+    "implied_upside": 0.4233961333439414,
+    "delta_vs_index": 0.24149232623670885,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

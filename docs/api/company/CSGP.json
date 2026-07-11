@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "CSGP",
+    "name": "CoStar Group, Inc.",
+    "price": 28.39,
+    "mean_target": 47.5,
+    "num_analysts": 20,
+    "implied_upside": 0.6731243395561817,
+    "delta_vs_index": 0.49122053244894914,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "WDC",
+    "name": "Western Digital Corporation",
+    "price": 582.585,
+    "mean_target": 606.125,
+    "num_analysts": 24,
+    "implied_upside": 0.040406120995219515,
+    "delta_vs_index": -0.14149768611201302,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

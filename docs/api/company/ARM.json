@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "ARM",
+    "name": "Arm Holdings plc",
+    "price": 323.39,
+    "mean_target": 298.83838,
+    "num_analysts": 37,
+    "implied_upside": -0.07591953987445504,
+    "delta_vs_index": -0.2578233469816876,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

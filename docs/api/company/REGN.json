@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "REGN",
+    "name": "Regeneron Pharmaceuticals, Inc.",
+    "price": 664.52,
+    "mean_target": 822.4846,
+    "num_analysts": 28,
+    "implied_upside": 0.2377123337145609,
+    "delta_vs_index": 0.05580852660732838,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "KDP",
+    "name": "Keurig Dr Pepper Inc.",
+    "price": 31.67,
+    "mean_target": 34.23529,
+    "num_analysts": 17,
+    "implied_upside": 0.08100063151247229,
+    "delta_vs_index": -0.10090317559476024,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

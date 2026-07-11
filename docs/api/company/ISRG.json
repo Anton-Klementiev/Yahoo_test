@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "ISRG",
+    "name": "Intuitive Surgical, Inc.",
+    "price": 406.78,
+    "mean_target": 561.84265,
+    "num_analysts": 30,
+    "implied_upside": 0.38119536358719724,
+    "delta_vs_index": 0.19929155647996472,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

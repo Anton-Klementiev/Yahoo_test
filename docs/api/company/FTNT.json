@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "FTNT",
+    "name": "Fortinet, Inc.",
+    "price": 157.51,
+    "mean_target": 113.89189,
+    "num_analysts": 37,
+    "implied_upside": -0.2769227985524728,
+    "delta_vs_index": -0.45882660565970534,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

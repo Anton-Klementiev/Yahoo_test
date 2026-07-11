@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "ALNY",
+    "name": "Alnylam Pharmaceuticals, Inc.",
+    "price": 298.76,
+    "mean_target": 438.75,
+    "num_analysts": 24,
+    "implied_upside": 0.46857008970411035,
+    "delta_vs_index": 0.2866662825968778,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

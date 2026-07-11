@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "PEP",
+    "name": "Pepsico, Inc.",
+    "price": 137.38,
+    "mean_target": 162.81818,
+    "num_analysts": 22,
+    "implied_upside": 0.18516654534866805,
+    "delta_vs_index": 0.0032627382414355255,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

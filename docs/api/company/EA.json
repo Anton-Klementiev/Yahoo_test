@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "EA",
+    "name": "Electronic Arts Inc.",
+    "price": 206.41,
+    "mean_target": 205.7857,
+    "num_analysts": 14,
+    "implied_upside": -0.0030245627634320296,
+    "delta_vs_index": -0.18492836987066455,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

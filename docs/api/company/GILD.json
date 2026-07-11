@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "GILD",
+    "name": "Gilead Sciences, Inc.",
+    "price": 129.83,
+    "mean_target": 158.2963,
+    "num_analysts": 27,
+    "implied_upside": 0.2192582608025879,
+    "delta_vs_index": 0.037354453695355366,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

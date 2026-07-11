@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "KLAC",
+    "name": "KLA Corporation",
+    "price": 231.52,
+    "mean_target": 225.7857,
+    "num_analysts": 28,
+    "implied_upside": -0.024768054595715353,
+    "delta_vs_index": -0.20667186170294788,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

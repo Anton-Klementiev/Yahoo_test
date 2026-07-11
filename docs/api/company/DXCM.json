@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "DXCM",
+    "name": "DexCom, Inc.",
+    "price": 74.96,
+    "mean_target": 85.24,
+    "num_analysts": 25,
+    "implied_upside": 0.13713980789754537,
+    "delta_vs_index": -0.044763999209687155,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

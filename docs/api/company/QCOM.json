@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "QCOM",
+    "name": "QUALCOMM Incorporated",
+    "price": 189.16,
+    "mean_target": 220.22581,
+    "num_analysts": 31,
+    "implied_upside": 0.16423033410869106,
+    "delta_vs_index": -0.017673472998541467,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

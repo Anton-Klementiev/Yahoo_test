@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "BKNG",
+    "name": "Booking Holdings Inc. Common St",
+    "price": 178.39,
+    "mean_target": 224.37714,
+    "num_analysts": 35,
+    "implied_upside": 0.2577898985369136,
+    "delta_vs_index": 0.07588609142968106,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

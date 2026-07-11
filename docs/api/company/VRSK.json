@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "VRSK",
+    "name": "Verisk Analytics, Inc.",
+    "price": 185.39,
+    "mean_target": 220.4706,
+    "num_analysts": 17,
+    "implied_upside": 0.18922595609256165,
+    "delta_vs_index": 0.007322148985329124,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

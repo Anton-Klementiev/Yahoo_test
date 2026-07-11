@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "TMUS",
+    "name": "T-Mobile US, Inc.",
+    "price": 187.61,
+    "mean_target": 254.84615,
+    "num_analysts": 26,
+    "implied_upside": 0.3583825489046425,
+    "delta_vs_index": 0.17647874179740997,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "AMGN",
+    "name": "Amgen Inc.",
+    "price": 363.39,
+    "mean_target": 355.65518,
+    "num_analysts": 29,
+    "implied_upside": -0.021285175706541218,
+    "delta_vs_index": -0.20318898281377373,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

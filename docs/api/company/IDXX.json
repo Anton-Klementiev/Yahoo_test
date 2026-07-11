@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "IDXX",
+    "name": "IDEXX Laboratories, Inc.",
+    "price": 563.57,
+    "mean_target": 709.1429,
+    "num_analysts": 14,
+    "implied_upside": 0.2583049133204393,
+    "delta_vs_index": 0.07640110621320678,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "META",
+    "name": "Meta Platforms, Inc.",
+    "price": 669.21,
+    "mean_target": 827.91,
+    "num_analysts": 58,
+    "implied_upside": 0.23714529071591867,
+    "delta_vs_index": 0.05524148360868614,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "LIN",
+    "name": "Linde plc",
+    "price": 529.79,
+    "mean_target": 547.32,
+    "num_analysts": 25,
+    "implied_upside": 0.03308858226844615,
+    "delta_vs_index": -0.14881522483878637,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "HON",
+    "name": "Honeywell International Inc.",
+    "price": 226.42,
+    "mean_target": 246.45454,
+    "num_analysts": 11,
+    "implied_upside": 0.0884839678473634,
+    "delta_vs_index": -0.09341983925986913,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

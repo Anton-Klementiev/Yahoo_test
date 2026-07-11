@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "ROST",
+    "name": "Ross Stores, Inc.",
+    "price": 222.88,
+    "mean_target": 256.17648,
+    "num_analysts": 17,
+    "implied_upside": 0.1493919597989951,
+    "delta_vs_index": -0.03251184730823742,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

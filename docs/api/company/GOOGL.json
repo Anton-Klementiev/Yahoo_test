@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "GOOGL",
+    "name": "Alphabet Inc.",
+    "price": 357.18,
+    "mean_target": 432.0987,
+    "num_analysts": 53,
+    "implied_upside": 0.2097505459432219,
+    "delta_vs_index": 0.02784673883598937,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

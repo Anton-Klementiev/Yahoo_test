@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "TSLA",
+    "name": "Tesla, Inc.",
+    "price": 407.76,
+    "mean_target": 424.56,
+    "num_analysts": 40,
+    "implied_upside": 0.04120070629782228,
+    "delta_vs_index": -0.14070310080941026,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

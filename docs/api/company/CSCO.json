@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "CSCO",
+    "name": "Cisco Systems, Inc.",
+    "price": 121.31,
+    "mean_target": 127.18091,
+    "num_analysts": 22,
+    "implied_upside": 0.048395927788310894,
+    "delta_vs_index": -0.13350787931892164,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

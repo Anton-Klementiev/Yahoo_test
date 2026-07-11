@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "ASML",
+    "name": "ASML Holding N.V. - New York Re",
+    "price": 1797.32,
+    "mean_target": 1877.307,
+    "num_analysts": 15,
+    "implied_upside": 0.044503482963523515,
+    "delta_vs_index": -0.137400324143709,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

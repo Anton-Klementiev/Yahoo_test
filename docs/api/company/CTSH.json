@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "CTSH",
+    "name": "Cognizant Technology Solutions ",
+    "price": 42.57,
+    "mean_target": 67.142,
+    "num_analysts": 25,
+    "implied_upside": 0.5772140004698143,
+    "delta_vs_index": 0.3953101933625818,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

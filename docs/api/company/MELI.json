@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "MELI",
+    "name": "MercadoLibre, Inc.",
+    "price": 1852.22,
+    "mean_target": 2208.625,
+    "num_analysts": 24,
+    "implied_upside": 0.19242044681517312,
+    "delta_vs_index": 0.01051663970794059,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

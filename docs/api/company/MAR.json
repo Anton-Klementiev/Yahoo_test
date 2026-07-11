@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "MAR",
+    "name": "Marriott International",
+    "price": 376.11,
+    "mean_target": 380.83334,
+    "num_analysts": 24,
+    "implied_upside": 0.012558400467948226,
+    "delta_vs_index": -0.1693454066392843,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

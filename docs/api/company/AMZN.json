@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "AMZN",
+    "name": "Amazon.com, Inc.",
+    "price": 245.34,
+    "mean_target": 312.90628,
+    "num_analysts": 62,
+    "implied_upside": 0.275398548952474,
+    "delta_vs_index": 0.09349474184524148,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

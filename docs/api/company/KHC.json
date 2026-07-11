@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "KHC",
+    "name": "The Kraft Heinz Company",
+    "price": 24.85,
+    "mean_target": 23.73529,
+    "num_analysts": 17,
+    "implied_upside": -0.04485754527162987,
+    "delta_vs_index": -0.2267613523788624,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

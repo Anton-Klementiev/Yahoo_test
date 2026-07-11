@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "EXC",
+    "name": "Exelon Corporation",
+    "price": 46.8,
+    "mean_target": 49.44444,
+    "num_analysts": 18,
+    "implied_upside": 0.05650512820512827,
+    "delta_vs_index": -0.12539867890210427,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

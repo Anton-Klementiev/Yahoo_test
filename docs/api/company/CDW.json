@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "CDW",
+    "name": "CDW Corporation",
+    "price": 144.39,
+    "mean_target": 145.11111,
+    "num_analysts": 9,
+    "implied_upside": 0.004994182422605515,
+    "delta_vs_index": -0.176909624684627,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

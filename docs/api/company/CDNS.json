@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "CDNS",
+    "name": "Cadence Design Systems, Inc.",
+    "price": 384.17,
+    "mean_target": 388.7796,
+    "num_analysts": 25,
+    "implied_upside": 0.011998854673712159,
+    "delta_vs_index": -0.16990495243352038,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

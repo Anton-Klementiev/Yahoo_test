@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "CRWD",
+    "name": "CrowdStrike Holdings, Inc.",
+    "price": 187.18,
+    "mean_target": 183.81082,
+    "num_analysts": 49,
+    "implied_upside": -0.017999679452933005,
+    "delta_vs_index": -0.19990348656016554,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

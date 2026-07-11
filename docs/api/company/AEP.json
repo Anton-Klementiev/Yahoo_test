@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "AEP",
+    "name": "American Electric Power Company",
+    "price": 135.43,
+    "mean_target": 145.42857,
+    "num_analysts": 21,
+    "implied_upside": 0.07382832459573212,
+    "delta_vs_index": -0.10807548251150041,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

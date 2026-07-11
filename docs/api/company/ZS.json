@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "ZS",
+    "name": "Zscaler, Inc.",
+    "price": 139.27,
+    "mean_target": 192.57614,
+    "num_analysts": 44,
+    "implied_upside": 0.3827539312127522,
+    "delta_vs_index": 0.20085012410551967,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

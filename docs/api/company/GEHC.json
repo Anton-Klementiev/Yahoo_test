@@ -1,0 +1,15 @@
+{
+  "as_of": "2026-07-11",
+  "index_upside": 0.18190380710723253,
+  "company": {
+    "ticker": "GEHC",
+    "name": "GE HealthCare Technologies Inc.",
+    "price": 64.7,
+    "mean_target": 78.94737,
+    "num_analysts": 19,
+    "implied_upside": 0.22020664605873266,
+    "delta_vs_index": 0.038302838951500134,
+    "target_last_changed": "2026-07-11",
+    "included_in_index": true
+  }
+}

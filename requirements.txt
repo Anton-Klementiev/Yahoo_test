@@ -11,6 +11,7 @@ lxml
 fastapi      # the framework that serves your website and its data
 uvicorn      # the program that actually runs the FastAPI application
 jinja2       # fills your HTML page template with live values
+python-dotenv   # loads secrets from a .env file into the environment
 
 # --- Testing ---
 pytest       # runs the automated checks on your calculations

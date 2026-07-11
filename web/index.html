@@ -149,7 +149,8 @@ let sortKey = "delta_vs_index", sortDir = -1, sortType = "num";
 async function load() {
   let data;
   try {
-    const res = await fetch("/api/comparison");
+    const API_KEY = "__API_KEY__";  // replaced by the server at load time
+    const res = await fetch("/api/comparison", { headers: { "X-API-Key": API_KEY } });
     data = await res.json();
   } catch (e) {
     document.getElementById("asof").innerHTML =

@@ -12,3 +12,5 @@ logs/*.log
 
 # PyCharm's own local project settings
 .idea/
+
+.env

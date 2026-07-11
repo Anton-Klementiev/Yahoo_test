@@ -1,0 +1,13 @@
+# Keep the image small and the build reproducible. NOTE: data/ is deliberately NOT
+# excluded, because Option 1 bakes data/consensus.db into the image.
+.git
+.venv
+venv
+__pycache__
+*.pyc
+.pytest_cache
+.idea
+logs
+.env
+tests
+Untitled Diagram.drawio

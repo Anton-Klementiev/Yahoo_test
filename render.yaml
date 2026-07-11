@@ -1,0 +1,17 @@
+# Render Blueprint: one free Docker web service. Under Option 1 there is no separate
+# database service — the SQLite file ships inside the image (committed to the repo).
+#
+# In the Render dashboard, create a Blueprint from this file. Render builds the Docker
+# image from your repo and deploys it. The free instance sleeps after ~15 min idle and
+# takes ~1 minute to wake on the next request.
+
+services:
+  - type: web
+    name: nasdaq-consensus-api
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health   # public endpoint, so health checks pass without a key
+    envVars:
+      - key: API_KEY
+        generateValue: true        # Render generates a value; see the deploy notes about
+                                    # the key being visible in the served page

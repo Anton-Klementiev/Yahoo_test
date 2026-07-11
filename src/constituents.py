@@ -13,7 +13,11 @@ import pandas as pd
 
 logger = logging.getLogger(__name__)
 
-CONSTITUENTS_PATH = Path("data") / "constituents.csv"
+# Resolve relative to the project root (the folder above src/), NOT the current working
+# directory — otherwise the load breaks whenever the app is launched from anywhere else.
+# This matches how src/database.py already resolves its DB path.
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+CONSTITUENTS_PATH = PROJECT_ROOT / "data" / "constituents.csv"
 
 
 def get_constituents() -> list[str]:

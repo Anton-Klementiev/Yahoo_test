@@ -16,11 +16,35 @@ app = FastAPI(title="NASDAQ-100 Consensus vs Index")
 WEB_DIR = Path(__file__).resolve().parents[1] / "web"
 
 
+# In-memory cache of the built comparison. The underlying data changes only once a day
+# (after ingestion writes a new dated snapshot), so we rebuild the comparison only when a
+# newer snapshot date appears — instead of recomputing it from the database on every
+# request. Keyed by the latest observed_on date; a cheap MAX() query decides freshness.
+_cache: dict = {"as_of": None, "data": None}
+
+
+def _latest_observed_on(connection) -> str | None:
+    """The most recent snapshot date, or None if there are no snapshots yet."""
+    row = connection.execute("SELECT MAX(observed_on) AS latest FROM snapshots").fetchone()
+    return row["latest"] if row else None
+
+
 def _load_comparison() -> dict:
-    """Open the database, build the comparison, and always close the connection."""
+    """Return the comparison, rebuilding it only when new data has arrived.
+
+    Opens the database, checks the latest snapshot date cheaply, and reuses the cached
+    result if nothing has changed. The expensive build_comparison runs only when the
+    latest date differs from what is cached. The connection is always closed.
+    """
     connection = get_connection()
     try:
-        return build_comparison(connection)
+        latest = _latest_observed_on(connection)
+        if _cache["data"] is not None and _cache["as_of"] == latest:
+            return _cache["data"]
+        data = build_comparison(connection)
+        _cache["as_of"] = latest
+        _cache["data"] = data
+        return data
     finally:
         connection.close()
 
